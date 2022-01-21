@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code</title>
+    <link href="assets/img/logo.png" rel="icon">
+</head>
+<style>
+    div h1{
+        text-align: center;
+    }
+    div p{
+        font-size: 20px;
+        text-align: center;
+    }
+    .code{
+        height: 37rem;
+        width: 50rem;
+        background-color: black;
+        color: white;
+        
+    }
+
+    .code{
+        overflow-x:scroll;
+        height: 590px;
+        width: 45rem;
+
+        overflow-y: scroll;
+        height: 590px;
+        width: 45rem;
+    }
+
+    ul{
+        font-size: 22px;
+    }
+
+    .talk{
+        font-size: 25px;
+    }
+
+    .starting{
+        text-align: left;
+    }
+
+    .package{
+        text-align: left;
+    }
+    #ai{
+        width: 100px;
+        height: 100px;
+        padding-left: 500px;
+    }
+</style>
+<body>
+
+    <div>
+        <h1>Project 1: Iron Man Desktop Jarvis AI Desktop Voice Assistant</h1>
+        <p>Have you ever wondered how cool it would be to have your own A.I. assistant? Imagine how easier it would be to send emails without typing a single word, doing Wikipedia searches without opening web browsers, and performing many other daily tasks like playing music with the help of a single voice command. In this tutorial, I will teach you how you can make your personal A.I. assistant using Python.</p>
+    </div>
+
+    <div>
+        <img id="ai" src="../Kelly/assets/img/ai.jpg" alt="">
+    </div>
+
+    <div>
+        <h2>What can this A.I. assistant do for you?</h2>
+        <ul>
+            <li>It can send emails on your behalf.</li>
+            <li>It can do Wikipedia searches for you.</li>
+            <li>It is capable of opening websites like Google, Youtube, etc., in a web browser.</li>
+            <li>It is capable of opening your code editor or IDE with a single voice command.</li>
+        </ul>
+    </div>
+
+    <div class="talk">
+        Enough Talk! Lets Build our own JARVIS
+    </div>
+
+    <div>
+        <h2>Starting with Pycharm</h2>
+        <p class="starting">I am going to use Pycharm. Start a new project and create a new file jarvis.py</p>
+    </div>
+
+    <div>
+        <h2>Packages To Be installed Before Writing the code</h2>
+        <p class="package">Go in the command line/Windows Powershell and write everything one by one.</p>
+        <ul>
+            <li>pip install pyttsx3</li>
+            <li>pip install speechRecognition</li>
+            <li>pip install wikipedia</li>
+            <li>pip install webbrowser</li>
+            <li>pip install Pyaudio</li>
+        </ul>
+    </div>
+    <div class="code">
+        <pre class="language-python"><code>
+    import pyttsx3 #pip install pyttsx3
+    import speech_recognition as sr #pip install speechRecognition
+    import datetime
+    import wikipedia #pip install wikipedia
+    import webbrowser
+    import os
+    import smtplib
+
+    engine = pyttsx3.init('sapi5')
+    voices = engine.getProperty('voices')
+    # print(voices[1].id)
+    engine.setProperty('voice', voices[0].id)
+
+
+    def speak(audio):
+        engine.say(audio)
+        engine.runAndWait()
+
+
+    def wishMe():
+        hour = int(datetime.datetime.now().hour)
+        if hour>=0 and hour<12:
+            speak("Good Morning!")
+
+        elif hour>=12 and hour<18:
+            speak("Good Afternoon!")
+
+        else:
+            speak("Good Evening!")
+
+        speak("I am Jarvis Sir. Please tell me how may I help you")
+
+    def takeCommand():
+        #It takes microphone input from the user and returns string output
+
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print("Listening...")
+            r.pause_threshold = 1.5
+            audio = r.listen(source)
+
+        try:
+            print("Recognizing...")
+            query = r.recognize_google(audio, language='en-in')
+            print(f"User said: {query}\n")
+
+        except Exception as e:
+            # print(e)
+            print("Say that again please...")
+            return "None"
+        return query
+
+    def sendEmail(to, content):
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.login('Your_gmail', 'Your_password')
+        server.sendmail('Again_your_gmail', to, content)
+        server.close()
+
+    if __name__ == "__main__":
+        wishMe()
+        while True:
+        # if 1:
+            query = takeCommand().lower()
+
+            # Logic for executing tasks based on query
+            if 'wikipedia' in query:
+                speak('Searching Wikipedia...')
+                query = query.replace("wikipedia", "")
+                results = wikipedia.summary(query, sentences=2)
+                speak("According to Wikipedia")
+                print(results)
+                speak(results)
+
+            elif 'who came first egg or hen' in query:
+                speak("egg came first because when the egg hatched then from it the hen came")
+
+            elif 'open youtube' in query:
+                webbrowser.open("youtube.com")
+
+            elif 'open google' in query:
+                webbrowser.open("google.com")
+
+            elif 'open stackoverflow' in query:
+                webbrowser.open("stackoverflow.com")
+
+            elif 'the time' in query:
+                strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                print(f"Sir, the time is {strTime}")
+                speak(f"Sir, the time is {strTime}")
+
+            elif 'open notepad' in query:
+                note = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Notepad"
+                os.startfile(note)
+
+            elif 'open teams' in query:
+                note = "C:\\Users\\ALOK\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Teams"
+                os.startfile(note)
+
+            elif 'open gmail' in query:
+                webbrowser.open("gmail.com")
+
+            elif 'jarvis terminate' in query:
+                print("Sir, now i am terminating myself... Good Bye")
+                speak("Sir, now i am terminating myself... Good Bye")
+                quit()
+
+            elif 'email to Name_ of_ the_ person_ whom_ to_ send' in query:
+                try:
+                    speak("What should I say?")
+                    content = takeCommand()
+                    to = "any_email_optional@gmail.com"
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                except Exception as e:
+                    print(e)
+                    speak("Sorry my friend Your_name. I am not able to send this gmail")
+
+
+            elif 'email to Name_ of_ the_ person_ whom_ to_ send' in query:
+                try:
+                    speak("What should I say?")
+                    content = takeCommand()
+                    to = "any_email_optional@gmail.com"
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                except Exception as e:
+                    print(e)
+                    speak("Sorry my friend Your_name. I am not able to send this gmail")
+
+            elif 'email to Name_ of_ the_ person_ whom_ to_ send' in query:
+                try:
+                    speak("What should I say?")
+                    content = takeCommand()
+                    to = "any_email_optional@gmail.com"
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                except Exception as e:
+                    print(e)
+                    speak("Sorry my friend Your_name. I am not able to send this gmail")
+
+            elif 'email to Name_ of_ the_ person_ whom_ to_ send' in query:
+                try:
+                    speak("What should I say?")
+                    content = takeCommand()
+                    to = "any_email_optional@gmail.com"
+                    sendEmail(to, content)
+                    speak("Email has been sent!")
+                except Exception as e:
+                    print(e)
+                    speak("Sorry my friend Your_name. I am not able to send this gmail")
+        </code></pre>
+    </div>
+
+    
+</body>
+</html>

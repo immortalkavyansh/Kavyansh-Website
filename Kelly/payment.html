@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code</title>
+    <link href="assets/img/logo.png" rel="icon">
+</head>
+<style>
+    div h1{
+        text-align: center;
+    }
+    div p{
+        text-align: center;
+        font-size: 20px;
+    }
+    .code{
+        height: 37rem;
+        width: 50rem;
+        background-color: black;
+        color: white;
+        overflow-x:scroll;
+        height: 590px;
+        width: 45rem;
+
+        overflow-y: scroll;
+        height: 590px;
+        width: 45rem;
+        
+    }
+</style>
+<body>
+    <div>
+        <h1>Source Code of Doing Online Payment</h1>
+        <p>How great it will be to have your own payment function.</p>
+        
+    </div>
+
+    <div class="code">
+        <pre class="language-python"><code>
+            # Payment Function Credit Card
+            import smtplib
+            def Payment():
+                """This is function which will do online credit card payment
+                   it will take input of cardno, , expiry  , owner, and amount cvv.
+                   It will also take your email and after transaction once email
+                   will be send to the email which you have entered in the input.
+                   This will work as a replacement of human to ai for online payment."""
+            
+                name = input("Whats Your good Name sir/maam\n"
+                             "Enter Here:- ")
+                print("Ok", name, "Nice to meet you")
+            
+                cardno = int(input("Enter Your card no.:-  "))
+                c = cardno + 0
+                if c>999999999999:
+                    while True:
+                            print("Invalid Input")
+                            D = int(input("Enter cardno. :- "))
+                            if D + 0<+999999999999:
+                                break
+                            else:
+                                pass
+                elif c<+999999999999:
+                    pass
+            
+                expirydate = int(input("Enter card expiry:- "))
+                if expirydate>9999 or expirydate<=999:
+                    while True:
+                            print("Invalid Input")
+                            F = int(input("Enter cvv:- "))                 
+                            if F + 0 <= 9999 and F + 0 >=999:
+                                break
+            
+                elif expirydate >=9999 and expirydate >= 999:
+                    pass
+                cardowner = str((input("Enter Card Owner Name:- ")))
+                cvv = int(input("Enter cvv:- "))
+                a = cvv + 0
+                if a>999 or a<=99:
+                    while True:
+                            print("Invalid Input")
+                            B = int(input("Enter cvv:- "))                 
+                            if B + 0 <= 999 and B + 0 >=99:
+                                break
+            
+                elif a >=999 and a >= 99:
+                    pass
+                email = (input("Whats your Gmail:- "))
+                print()
+                amount = str(input("Whats the amount rupees:-"))
+                print("Pls confirm your details:-")
+                try:
+                   print("CVV - ", D)
+                except:
+                    print("cardno. - ", cardno)
+                print("Expiry Date", expirydate)
+                print("Card Owner - ", cardowner)
+                try:
+                   print("CVV - ", B)
+                except:
+                    print("CVV - ", cvv)
+                print("Amount", amount)
+                print("Gmail:- ", email)
+                print()
+                comform = str(input("Conform? yes or no\n"
+                                    "enter here:- "))
+                if comform== "yes":
+                    print("Payment Succesfull")
+                else:
+                    print()
+                    print("Ok", name, "Do Payment again:-\n")
+                    Payment()
+                def sendEmail(to, content):
+                    
+                    server = smtplib.SMTP('smtp.gmail.com', 587)
+                    server.ehlo()
+                    server.starttls()
+                    server.login('Your_gmail@gmail.com', 'Your_password')
+                    server.sendmail('Your_gmail@gmail.com', to, content)
+                    server.close()
+                try:
+                    content = f"\nPythonWith(name):- Park Transaction\nYour transaction of rupees {amount} is completed\nThank you for visiting our park\nPlease come again to our park\n"
+                    to = email
+                    sendEmail(to, content)
+                    print("Email has been sent to", email)
+                except Exception as e:
+                    print(e)
+                    print("Sorry sir Your_name. I am not able to send this email")
+            Payment()        
+        </code></pre>
+    </div>
+</body>
+</html>

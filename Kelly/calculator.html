@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code</title>
+    <link href="assets/img/logo.png" rel="icon">
+</head>
+<style>
+    div h1 {
+        text-align: center;
+    }
+
+    div p {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .code {
+        height: 37rem;
+        width: 50rem;
+        background-color: black;
+        color: white;
+        overflow-x: scroll;
+        height: 590px;
+        width: 45rem;
+
+        overflow-y: scroll;
+        height: 590px;
+        width: 45rem;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>Source Code of Simple Maths Calculator</h1>
+        <p>Don't give stress to your brains, relax it. Imagine, How nice it will be to have your own calculator. You can
+            do anything from it</p>
+
+    </div>
+
+    <div class="code">
+        <pre class="language-python"><code>
+        
+        from tkinter import *
+
+        def click(event):
+            global scvalue
+            text = event.widget.cget("text")
+            if text == "=":
+                if scvalue.get().isdigit():
+                    value = int(scvalue.get())
+                else:
+                    try:
+                        value = eval(screen.get())
+
+                    except Exception as e:
+                        print(e)
+                        value = "Error"
+
+
+                scvalue.set(value)
+                screen.update()
+
+            elif text == "Clear":
+                scvalue.set("")
+                screen.update()
+
+            else:
+                scvalue.set(scvalue.get() + text)
+                screen.update()
+
+        root = Tk()
+        root.geometry("560x700")
+        root.title("Calculator By Kavyansh")
+        root.wm_iconbitmap("Give_the_path_of_the_ico_image_which_you_have_downloaded")
+        root.config(bg="yellow")
+
+        scvalue = StringVar()
+        scvalue.set("")
+        screen = Entry(root, textvar=scvalue, font="lucida 40 bold")
+        screen.pack(fill=X, ipadx=8, pady=5, padx=10)
+
+        f = Frame(root, bg="red")
+        b = Button(f, text="9", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="8", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="7", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        f.pack()
+
+
+        f = Frame(root, bg="red")
+        b = Button(f, text="6", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="5", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="4", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        f.pack()
+
+
+        f = Frame(root, bg="red")
+        b = Button(f, text="3", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="2", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="1", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        f.pack()
+
+
+        f = Frame(root, bg="red")
+        b = Button(f, text="0", padx=14, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="-", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="*", padx=14, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        f.pack()
+
+
+        f = Frame(root, bg="red")
+
+        b = Button(f, text="+", padx=13, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="/", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+        b = Button(f, text="=", padx=13, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+
+        f.pack()
+
+        f = Frame(root, bg="red")
+        b = Button(f, text="Clear", padx=10, pady=5, font="lucida 35 bold")
+        b.pack(side=LEFT, padx=18, pady=5)
+        b.bind("<Button-1>", click)
+
+
+        f.pack()
+
+        root.mainloop()
+
+</code></pre>
+    </div>
+<br>
+<br>
+<br>
+    <div>
+        <style>
+            table,th,td {
+                border: 1px solid black;
+            }
+
+        </style>
+
+        <table style="width:100%">
+            <tr>
+                <th>File Name</th>
+                <th>Download</th>
+            </tr>
+            <tr>
+                <td>Calculator</td>
+                <td><a href="../../python  Projects/calculator.py" download>
+                    Download
+                  </a></td>
+            </tr>
+            <tr>
+                <td>Calculator Image</td>
+                <td><a href="../../python  Projects/calcu.ico" download>
+                    Download
+                  </a></td>
+                
+            </tr>
+        </table>
+    </div>
+<br>
+<br>
+<br>
+</body>
+
+</html>
